@@ -68,30 +68,30 @@
 
                                 <table class="min-w-full divide-y divide-gray-300 dark:divide-gray-700">
 
-                                    <thead class="bg-gray-200 dark:bg-gray-700">
+                                    <thead class="bg-gray-200 dark:bg-gray-700 ">
                                         <tr>
                                             <th scope="col"
-                                                class="px-6 py-3 text-start text-sm font-medium text-gray-500 uppercase">
+                                                class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
                                                 Sl</th>
                                             
                                             <th scope="col"
-                                                class="px-6 py-3 text-start text-sm font-medium text-gray-500 uppercase">
+                                                class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
                                                 Name</th>
                                             <th scope="col"
-                                                class="px-6 py-3 text-start text-sm font-medium text-gray-500 uppercase">
+                                                class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
                                                 Code</th>
                                             <th scope="col"
-                                                class="px-6 py-3 text-start text-sm font-medium text-gray-500 uppercase">
+                                                class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
                                                 Status</th>
                                             <th scope="col"
-                                                class="px-6 py-3 text-end text-sm font-medium text-gray-500 uppercase">
+                                                class="px-6 py-3 text-end text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
                                                 Action</th>
                                         </tr>
                                     </thead>
 
                                     <tbody class="divide-y divide-gray-300 dark:divide-gray-700">
                                         <tr v-for="(service, index) in services" :key="index">
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200"> {{ index+1 }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-400"> {{ index+1 }}</td>
                                             
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
                                                 {{ service.name }}</td>
@@ -104,8 +104,7 @@
                                             </td>
 
                                             <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                                <button type="button"
-                                                    class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">Delete</button>
+                                               <Link :href="route('service.edit', {'service':service.id})" preserve-scroll preserve-state class="py-2 px-3 bg-blue-600 text-white rounded-md dark:outline-primary">Edit</Link>
                                             </td>
                                         </tr>
                                     </tbody>
