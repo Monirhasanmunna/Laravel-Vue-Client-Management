@@ -11,9 +11,11 @@ class ServiceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $services = Service::orderBy('id', 'desc')->get();
+        $searchInput = $request->input('input');
+        $selectItem = $request->input('select') ?? 20;
+        $services = Service::SearchByName($searchInput)->orderByDesc('id')->paginate($selectItem)->withQueryString();
 
         return Inertia::render('Services/ServiceList',[
             'services' => $services,
@@ -25,7 +27,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Services/CreateService');
     }
 
     /**

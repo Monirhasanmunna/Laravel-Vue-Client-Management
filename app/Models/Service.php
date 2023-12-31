@@ -11,5 +11,8 @@ class Service extends Model
 
     protected $fillable = ['name','slug', 'code', 'description', 'status', 'created_at', 'updated_at'];
 
-
+    public function scopeSearchByName($query, $searchInput){
+        return $query->where('name', 'like', '%' . $searchInput . '%')
+                ->orWhere('code', 'like', '%' . $searchInput . '%');
+    }
 }

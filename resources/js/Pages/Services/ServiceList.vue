@@ -1,10 +1,23 @@
 <script setup>
-    import { Link } from '@inertiajs/vue3';
+    import { Link,router } from '@inertiajs/vue3';
     import MainLayout from '@/Layouts/MainLayout.vue'
+    import { ref,watch,reactive } from 'vue';
 
     defineProps({
-        services : {Array}
+        services : {Object}
     });
+
+    const searchInput = reactive({
+        input : '',
+        select : 20,
+    });
+
+    watch([()=>searchInput.input, ()=>searchInput.select], (newInput, oldInput) => {
+        router.get(route('service.index'),searchInput,{
+            preserveScroll:true,
+            preserveState:true
+        });
+    },{ immediate: true });
 
 </script>
 
@@ -42,16 +55,23 @@
                 <Link :href="route('service.create')" class="btn-primary">Create Service</Link>
             </div>
 
-
             <div class="flex flex-col">
                 <div class="-m-1.5 overflow-x-auto">
                     <div class="p-1.5 min-w-full inline-block align-middle">
-                        <div
-                            class="border rounded-lg divide-y divide-gray-200 dark:border-gray-700 dark:divide-gray-700">
-                            <div class="py-3 px-4">
+                        <div class="border rounded-lg divide-y divide-gray-200 dark:border-gray-700 dark:divide-gray-700">
+                            <div class="py-3 px-4 flex justify-between">
+
+                                <div class="inputDropdown">
+                                    <select id="select" v-model="searchInput.select" class="w-32 border-1 border-gray-300 rounded-md text-gray-500">
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="50">50</option>
+                                    </select>
+                                </div>
+
                                 <div class="relative max-w-xs">
                                     <label class="sr-only">Search</label>
-                                    <input type="text" name="hs-table-with-pagination-search"
+                                    <input type="text" name="hs-table-with-pagination-search" v-model="searchInput.input"
                                         id="hs-table-with-pagination-search"
                                         class="py-2 px-3 ps-9 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
                                         placeholder="Search for items">
@@ -90,7 +110,7 @@
                                     </thead>
 
                                     <tbody class="divide-y divide-gray-300 dark:divide-gray-700">
-                                        <tr v-for="(service, index) in services" :key="index">
+                                        <tr v-for="(service, index) in services.data" :key="index">
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-400"> {{ index+1 }}</td>
                                             
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
@@ -111,25 +131,12 @@
                                 </table>
                             </div>
 
-                            <div class="py-1 px-4">
+                            <div class="py-3 px-4">
                                 <nav class="flex items-center space-x-1">
-                                    <button type="button"
-                                        class="p-2.5 inline-flex items-center gap-x-2 text-sm rounded-full text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white/10 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
-                                        <span aria-hidden="true">«</span>
-                                        <span class="sr-only">Previous</span>
-                                    </button>
-                                    <button type="button"
-                                        class="min-w-[40px] flex justify-center items-center text-gray-800 hover:bg-gray-100 py-2.5 text-sm rounded-full disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white/10"
-                                        aria-current="page">1</button>
-                                    <button type="button"
-                                        class="min-w-[40px] flex justify-center items-center text-gray-800 hover:bg-gray-100 py-2.5 text-sm rounded-full disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white/10">2</button>
-                                    <button type="button"
-                                        class="min-w-[40px] flex justify-center items-center text-gray-800 hover:bg-gray-100 py-2.5 text-sm rounded-full disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white/10">3</button>
-                                    <button type="button"
-                                        class="p-2.5 inline-flex items-center gap-x-2 text-sm rounded-full text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white/10 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
-                                        <span class="sr-only">Next</span>
-                                        <span aria-hidden="true">»</span>
-                                    </button>
+                                    <Link :href="link.url" preserve-scroll preserve-state :class="{'bg-gray-300 dark:bg-green-500 dark:text-blue-800':link.active == true}" v-for="(link, index) in services.links" :key="index"
+                                        class="py-2 px-3 inline-flex items-center gap-x-2 text-sm rounded-full text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white dark:hover:text-blue-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                                        <span aria-hidden="true" v-html="link.label"></span>
+                                    </Link>
                                 </nav>
                             </div>
 
