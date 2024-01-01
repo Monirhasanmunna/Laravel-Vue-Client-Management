@@ -1,5 +1,19 @@
 <script setup>
     import MainLayout from '@/Layouts/MainLayout.vue'
+    import {reactive} from 'vue';
+    import { Link,useForm } from '@inertiajs/vue3';
+    
+    const form = useForm({
+        name : '',
+        code : '',
+        description : '',
+    });
+    
+    const formSubmit = ()=>{
+        form.post(route('service.store'), {
+            preserveScroll : true,
+        });
+    }
 </script>
 
 <template>
@@ -30,8 +44,37 @@
         </div>
         <!-- Breadcrumb -->
 
-        <div class="card">
-            
+        <div class="card space-y-5">
+            <div class="flex justify-between items-center">
+                <h3>Service Create</h3>
+                <Link :href="route('service.index')" class="btn-secondary">Back</Link>
+            </div>
+
+            <div class="card">
+                <form @submit.prevent="formSubmit">
+                    <div class="form-wrapper space-y-4">
+                        <div class="input-row flex gap-3 flex-col md:flex-row">
+                            <div class="group shrink  md:w-6/12">
+                                <label for="name" class="block text-sm text-gray-500 font-medium mb-2 dark:text-white">Name</label>
+                                <input type="text" id="name" v-model="form.name" class="input w-full" placeholder="Enter Service Name">
+                            </div>
+                            <div class="group shrink md:w-6/12">
+                                <label for="code" class="block text-sm text-gray-500 font-medium mb-2 dark:text-white">Code</label>
+                                <input type="text" id="code" v-model="form.code" class="input w-full" placeholder="Enter Service Code">
+                            </div>
+                        </div>
+
+                        <div class="input-row">
+                            <label for="description" class="block text-sm text-gray-500 font-medium mb-2 dark:text-white">Description</label>
+                            <textarea name="description" id="description" v-model="form.description" class="w-full border-gray-300 rounded-md" placeholder="Type description...." rows="5"></textarea>
+                        </div>
+
+                        <div class="input-row">
+                            <button type="submit" class="btn-primary dark:outile-primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
 
     </MainLayout>
