@@ -15,6 +15,7 @@ class ServiceController extends Controller
     {
         $searchInput = $request->input('input');
         $selectItem = $request->input('select') ?? 20;
+        
         $services = Service::SearchByName($searchInput)->orderByDesc('id')->paginate($selectItem)->withQueryString();
 
         return Inertia::render('Services/ServiceList',[

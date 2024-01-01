@@ -19,6 +19,8 @@
         "vue": "^3.2.41"
     },
     "dependencies": {
+        "lodash": "^4.17.21",
+        "lodash.debounce": "^4.0.8",
         "preline": "^2.0.2"
     }
 }
