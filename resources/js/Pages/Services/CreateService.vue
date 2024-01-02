@@ -68,7 +68,7 @@
 
                         <div class="input-row">
                             <label for="description" class="block text-sm text-gray-500 font-medium mb-2 dark:text-white">Description</label>
-                            <textarea name="description" id="description" v-model="form.description" class="w-full border-gray-300 rounded-md" placeholder="Type description...." rows="5"></textarea>
+                            <textarea name="description" id="description" v-model="form.description" class="input" placeholder="Type description...." rows="5"></textarea>
                             <p v-if="form.errors.description" class="text-sm text-red-600">{{ form.errors.description }}</p>
                         </div>
 
