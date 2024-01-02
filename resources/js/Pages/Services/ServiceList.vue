@@ -66,7 +66,7 @@
                             <div class="py-3 px-4 flex justify-between">
 
                                 <div class="inputDropdown">
-                                    <select id="select" v-model="searchInput.select" class="w-32 border-1 border-gray-300 rounded-md text-gray-500">
+                                    <select id="select" v-model="searchInput.select" class="input w-32 py-2 rounded-sm">
                                         <option value="10">10</option>
                                         <option value="20">20</option>
                                         <option value="50">50</option>
@@ -77,7 +77,7 @@
                                     <label class="sr-only">Search</label>
                                     <input type="text" name="hs-table-with-pagination-search" v-model="searchInput.input"
                                         id="hs-table-with-pagination-search"
-                                        class="py-2 px-3 ps-9 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                                        class="py-2 px-3 ps-9 block w-full border-gray-200 shadow-sm rounded-sm text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
                                         placeholder="Search for items">
                                     <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-3">
                                         <svg class="h-4 w-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24"
@@ -136,9 +136,9 @@
                             </div>
 
                             <div class="py-3 px-4">
-                                <nav class="flex items-center space-x-1">
-                                    <Link :href="link.url" preserve-scroll preserve-state :class="{'bg-gray-300 dark:bg-green-500 dark:text-blue-800':link.active == true}" v-for="(link, index) in services.links" :key="index"
-                                        class="py-2 px-3 inline-flex items-center gap-x-2 text-sm rounded-full text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white dark:hover:text-blue-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                                <nav class="flex items-center space-x-2">
+                                    <Link :href="link.url" preserve-scroll preserve-state :class="{'bg-gray-300 dark:bg-[#141b2b] dark:text-blue-800':link.active == true}" v-for="(link, index) in services.links" :key="index"
+                                        class="py-2 px-3 inline-flex items-center text-sm rounded-full text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white dark:hover:text-blue-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                                         <span aria-hidden="true" v-html="link.label"></span>
                                     </Link>
                                 </nav>
