@@ -38,9 +38,9 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:services',
-            'code' => 'required|unique:services',
-            'description' => 'max:120'
+            'name'          => 'required|unique:services',
+            'code'          => 'required|unique:services',
+            'description'   => 'max:120'
         ]);
 
         Service::create([
@@ -50,7 +50,7 @@ class ServiceController extends Controller
             'description' => $request->description,
         ]);
 
-        return to_route('service.index');
+        return to_route('service.index')->with('success', 'Service created successfully');
     }
 
     /**

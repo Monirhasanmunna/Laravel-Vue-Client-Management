@@ -57,16 +57,19 @@
                             <div class="group shrink  md:w-6/12">
                                 <label for="name" class="block text-sm text-gray-500 font-medium mb-2 dark:text-white">Name</label>
                                 <input type="text" id="name" v-model="form.name" class="input w-full" placeholder="Enter Service Name">
+                                <p v-if="form.errors.name" class="text-sm text-red-600">{{ form.errors.name }}</p>
                             </div>
                             <div class="group shrink md:w-6/12">
                                 <label for="code" class="block text-sm text-gray-500 font-medium mb-2 dark:text-white">Code</label>
                                 <input type="text" id="code" v-model="form.code" class="input w-full" placeholder="Enter Service Code">
+                                <p v-if="form.errors.code" class="text-sm text-red-600">{{ form.errors.code }}</p>
                             </div>
                         </div>
 
                         <div class="input-row">
                             <label for="description" class="block text-sm text-gray-500 font-medium mb-2 dark:text-white">Description</label>
                             <textarea name="description" id="description" v-model="form.description" class="w-full border-gray-300 rounded-md" placeholder="Type description...." rows="5"></textarea>
+                            <p v-if="form.errors.description" class="text-sm text-red-600">{{ form.errors.description }}</p>
                         </div>
 
                         <div class="input-row">

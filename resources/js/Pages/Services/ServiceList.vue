@@ -1,6 +1,8 @@
 <script setup>
     import { Link,router } from '@inertiajs/vue3';
     import MainLayout from '@/Layouts/MainLayout.vue'
+    import Toast from '@/Components/Toast.vue';
+
     import { ref,watch,reactive } from 'vue';
     import {debounce} from 'lodash'
 
@@ -23,6 +25,7 @@
 
 <template>
     <MainLayout>
+        <Toast/>
         <!-- Breadcrumb -->
         <div class="flex items-center justify-between">
             <div>
