@@ -2,11 +2,13 @@
     import { Link,router } from '@inertiajs/vue3';
     import MainLayout from '@/Layouts/MainLayout.vue'
     import Toast from '@/Components/Toast.vue';
+    import ConfirmAllert from '@/Components/ConfirmAllert.vue';
+    // import { router } from '@inertiajs/vue3'
 
     import { ref,watch,reactive } from 'vue';
     import {debounce} from 'lodash'
 
-    defineProps({
+   const props = defineProps({
         services : {Object}
     });
 
@@ -21,11 +23,31 @@
     },
     ),500));
 
+    const isShowAllert = ref(false);
+    const selectedId = ref(null)
+
+    const showAlert = (id) => {
+        isShowAllert.value = true
+        selectedId.value = id
+    }
+
+    const hideAlert = () => {
+        isShowAllert.value = false
+    }
+
+    const deleteItem = () =>{
+        router.delete(route('service.destroy', selectedId.value),{
+            preserveScroll: true,
+            preserveState: true
+        });
+    }
+
 </script>
 
 <template>
     <MainLayout>
         <Toast/>
+        <ConfirmAllert v-if="isShowAllert" @hideAlert="hideAlert" @deleteItem="deleteItem" />
         <!-- Breadcrumb -->
         <div class="flex items-center justify-between">
             <div>
@@ -127,7 +149,8 @@
                                                 <span v-else class="badge-danger dark:outline-danger">Inactive</span>
                                             </td>
 
-                                            <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
+                                            <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium space-x-3">
+                                               <button @click="showAlert(service.id)" class="py-2 px-3 bg-red-600 text-white rounded-md dark:outline-danger">Delete</button>
                                                <Link :href="route('service.edit', {'service':service.slug})" preserve-scroll preserve-state class="py-2 px-3 bg-blue-600 text-white rounded-md dark:outline-primary">Edit</Link>
                                             </td>
                                         </tr>
@@ -150,7 +173,7 @@
             </div>
         </div>
 
-        
+
     </MainLayout>
 </template>
 

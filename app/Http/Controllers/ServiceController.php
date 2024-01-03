@@ -44,21 +44,13 @@ class ServiceController extends Controller
         ]);
 
         Service::create([
-            'name' => $request->name,
-            'code' => $request->code,
-            'slug' => Str::slug($request->code),
-            'description' => $request->description,
+            'name'          => $request->name,
+            'code'          => $request->code,
+            'slug'          => Str::slug($request->code),
+            'description'   => $request->description,
         ]);
 
         return to_route('service.index')->with('success', 'Service created successfully');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
     }
 
     /**
@@ -66,7 +58,11 @@ class ServiceController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $service  = Service::where('slug', $id)->first();
+
+        return Inertia::render('Services/EditService',[
+            'service' => $service
+        ]);
     }
 
     /**
@@ -74,7 +70,21 @@ class ServiceController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name'          => 'required|unique:services,name,'.$id,
+            'code'          => 'required|unique:services,code,'.$id,
+            'description'   => 'max:120'
+        ]);
+
+        Service::find($id)->update([
+            'name'          => $request->name,
+            'code'          => $request->code,
+            'slug'          => Str::slug($request->code),
+            'description'   => $request->description,
+            'status'        => $request->status
+        ]);
+
+        return to_route('service.index')->with('success', 'Service updated successfully');
     }
 
     /**
@@ -82,6 +92,7 @@ class ServiceController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Service::find($id)->delete();
+        return redirect()->back()->with('success', 'Service deleted successfully');
     }
 }
