@@ -97,13 +97,15 @@
                                             <th scope="col"
                                                 class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
                                                 Sl</th>
-                                            
                                             <th scope="col"
                                                 class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
                                                 Name</th>
                                             <th scope="col"
                                                 class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
                                                 Code</th>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
+                                                Cost</th>
                                             <th scope="col"
                                                 class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
                                                 Status</th>
@@ -119,8 +121,12 @@
                                             
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
                                                 {{ service.name }}</td>
+
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
                                                 {{ service.code }}</td>
+
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                                                {{ service.cost }}</td>
 
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
                                                 <span v-if="service.status === 'active'" class="badge-success dark:outline-success">Actice</span>

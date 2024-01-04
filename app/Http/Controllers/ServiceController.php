@@ -40,7 +40,8 @@ class ServiceController extends Controller
         $request->validate([
             'name'          => 'required|unique:services',
             'code'          => 'required|unique:services',
-            'description'   => 'max:120'
+            'description'   => 'max:120',
+            'cost'          => 'required',
         ]);
 
         Service::create([
@@ -48,6 +49,7 @@ class ServiceController extends Controller
             'code'          => $request->code,
             'slug'          => Str::slug($request->code),
             'description'   => $request->description,
+            'cost'          => $request->cost
         ]);
 
         return to_route('service.index')->with('success', 'Service created successfully');
@@ -73,7 +75,8 @@ class ServiceController extends Controller
         $request->validate([
             'name'          => 'required|unique:services,name,'.$id,
             'code'          => 'required|unique:services,code,'.$id,
-            'description'   => 'max:120'
+            'description'   => 'max:120',
+            'cost'          => 'required',
         ]);
 
         Service::find($id)->update([
@@ -81,7 +84,8 @@ class ServiceController extends Controller
             'code'          => $request->code,
             'slug'          => Str::slug($request->code),
             'description'   => $request->description,
-            'status'        => $request->status
+            'status'        => $request->status,
+            'cost'          => $request->cost
         ]);
 
         return to_route('service.index')->with('success', 'Service updated successfully');

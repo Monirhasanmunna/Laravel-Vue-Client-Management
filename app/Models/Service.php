@@ -9,7 +9,7 @@ class Service extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','slug', 'code', 'description', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['name','slug', 'code', 'cost', 'description', 'status', 'created_at', 'updated_at'];
 
     public function scopeSearchByName($query, $searchInput){
         return $query->where('name', 'like', '%' . $searchInput . '%')
