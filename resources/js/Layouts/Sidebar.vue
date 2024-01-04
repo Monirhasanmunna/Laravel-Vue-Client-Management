@@ -50,6 +50,35 @@ const page = usePage();
         </li>
 
 
+        <li class="hs-accordion space-y-1" :class="{ 'active': $page.url.startsWith('/client') }" id="account-accordion">
+          <button type="button" class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-600 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" :class="{'ring-1 ring-gray-400 dark:ring-gray-600': $page.url.startsWith('/client') }">
+            <svg class="flex-shrink-0 mt-0.5 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="15" r="3"/><circle cx="9" cy="7" r="4"/><path d="M10 15H6a4 4 0 0 0-4 4v2"/><path d="m21.7 16.4-.9-.3"/><path d="m15.2 13.9-.9-.3"/><path d="m16.6 18.7.3-.9"/><path d="m19.1 12.2.3-.9"/><path d="m19.6 18.7-.4-1"/><path d="m16.8 12.3-.4-1"/><path d="m14.3 16.6 1-.4"/><path d="m20.7 13.8 1-.4"/></svg>
+            Client
+
+            <svg class="hs-accordion-active:block ms-auto hidden w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+
+            <svg class="hs-accordion-active:hidden ms-auto block w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+
+          <div id="account-accordion-child" class="hs-accordion-content bg-gray-300 dark:bg-gray-900 pb-2 rounded-md w-full overflow-hidden transition-[height] duration-300 hidden" :style="{ display: $page.url.startsWith('/client') ? 'block' : 'none' }">
+            <ul class="pt-2 px-2 space-y-1">
+
+              <li>
+                <Link :href="route('client.index')" class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" :class="{'bg-gray-200 dark:bg-gray-800': $page.url.startsWith('/client')}">
+                  Client List
+                </Link>
+              </li>
+              <li>
+                <Link :href="route('client.create')" class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" :class="{'bg-gray-200 dark:bg-gray-800': $page.url === '/client/create'}">
+                  Create Client
+                </Link>
+              </li>
+
+            </ul>
+          </div>
+        </li>
+
+
       </ul>
     </nav>
   </div>

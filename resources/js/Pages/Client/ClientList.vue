@@ -6,7 +6,7 @@
     import {debounce} from 'lodash'
 
     const props = defineProps({
-        services : {Object}
+        clients : {Object}
     });
 
     const searchInput = reactive({
@@ -14,7 +14,7 @@
         select : 20,
     });
 
-    watch(searchInput, debounce(()=> router.get(route('service.index'),searchInput,{
+    watch(searchInput, debounce(()=> router.get(route('client.index'),searchInput,{
         preserveScroll:true,
         preserveState:true
     },
@@ -52,11 +52,10 @@
         </div>
         <!-- Breadcrumb -->
 
-
         <div class="card space-y-6">
             <div class="flex justify-between items-center">
                 <h3>Service List</h3>
-                <Link :href="route('service.create')" class="btn-primary" data-hs-overlay="#createModal">Create Service</Link>
+                <Link :href="route('client.create')" class="btn-primary" data-hs-overlay="#createModal">Create Client</Link>
             </div>
 
             <div class="flex flex-col">
@@ -88,25 +87,29 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="overflow-hidden">
-
                                 <table class="min-w-full divide-y divide-gray-300 dark:divide-gray-700">
-
                                     <thead class="bg-gray-200 dark:bg-gray-700 ">
                                         <tr>
                                             <th scope="col"
                                                 class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
                                                 Sl</th>
-                                            
                                             <th scope="col"
                                                 class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
                                                 Name</th>
                                             <th scope="col"
                                                 class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
-                                                Code</th>
+                                                Age</th>
                                             <th scope="col"
                                                 class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
-                                                Status</th>
+                                                Phone</th>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
+                                                Address</th>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
+                                                Gender</th>
                                             <th scope="col" width="10%"
                                                 class="px-6 py-3 text-center text-sm font-medium text-gray-500 dark:text-gray-400 uppercase ">
                                                 Action</th>
@@ -114,22 +117,25 @@
                                     </thead>
 
                                     <tbody class="divide-y divide-gray-300 dark:divide-gray-700">
-                                        <tr v-for="(service, index) in services.data" :key="index">
+                                        <tr v-for="(client, index) in clients.data" :key="index">
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-400"> {{ index+1 }}</td>
                                             
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
-                                                {{ service.name }}</td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                                {{ service.code }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200 capitalize">
+                                                {{ client.name }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200 capitalize">
+                                                {{ client.age }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200 capitalize">
+                                                {{ client.phone }}</td>
 
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                                <span v-if="service.status === 'active'" class="badge-success dark:outline-success">Actice</span>
-                                                <span v-else class="badge-danger dark:outline-danger">Inactive</span>
-                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200 capitalize">
+                                                {{ client.address }}</td>
+
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200 capitalize">
+                                                {{ client.gender }}</td>
 
                                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium space-x-3">
-                                               <Link :href="route('service.update', {'service': service.id})" method="delete" preserve-scroll="true" preserve-state="true" type="button" as="button" class="py-2 px-3 bg-red-600 text-white rounded-md dark:outline-danger">Delete</Link>
-                                               <Link :href="route('service.edit', {'service':service.slug})" preserve-scroll preserve-state class="py-2 px-3 bg-blue-600 text-white rounded-md dark:outline-primary">Edit</Link>
+                                               <Link :href="route('client.update', {'client': client.id})" method="delete" preserve-scroll="true" preserve-state="true" type="button" as="button" class="py-2 px-3 bg-red-600 text-white rounded-md dark:outline-danger">Delete</Link>
+                                               <Link :href="route('client.edit', {'client':client.id})" preserve-scroll preserve-state class="py-2 px-3 bg-blue-600 text-white rounded-md dark:outline-primary">Edit</Link>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -138,7 +144,7 @@
 
                             <div class="py-3 px-4">
                                 <nav class="flex items-center space-x-2">
-                                    <Link :href="link.url" preserve-scroll preserve-state :class="{'bg-gray-300 dark:bg-[#141b2b] dark:text-blue-800':link.active == true}" v-for="(link, index) in services.links" :key="index"
+                                    <Link :href="link.url" preserve-scroll preserve-state :class="{'bg-gray-300 dark:bg-[#141b2b] dark:text-blue-800':link.active == true}" v-for="(link, index) in clients.links" :key="index"
                                         class="py-2 px-3 inline-flex items-center text-sm rounded-full text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white dark:hover:text-blue-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                                         <span aria-hidden="true" v-html="link.label"></span>
                                     </Link>
@@ -150,7 +156,6 @@
                 </div>
             </div>
         </div>
-
 
     </MainLayout>
 </template>

@@ -90,9 +90,10 @@ class ServiceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Service $service)
     {
-        Service::find($id)->delete();
+        $service->delete();
         return redirect()->back()->with('success', 'Service deleted successfully');
     }
 }
+  

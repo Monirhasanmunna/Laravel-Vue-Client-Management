@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Foundation\Application;
@@ -31,7 +32,11 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-Route::resource('service',ServiceController::class)->middleware(['auth', 'verified']);
+Route::group(['middleware' => ['auth', 'verified']],function(){
+    Route::resource('service',ServiceController::class);
+    Route::resource('client', ClientController::class);
+});
+
 
 
 require __DIR__.'/auth.php';
