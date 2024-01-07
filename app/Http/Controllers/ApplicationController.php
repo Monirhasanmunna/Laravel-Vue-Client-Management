@@ -17,7 +17,14 @@ class ApplicationController extends Controller
      */
     public function index(Request $request)
     {
-        return Inertia::render('Application/Index');
+        $input = $request->input('input');
+        $items = $request->input('select');
+
+        $applications = Application::with(['service','client'])->Search($input)->orderByDesc('id')->paginate($items);
+
+        return Inertia::render('Application/Index',[
+            'applications' => $applications
+        ]);
     }
 
     /**
@@ -39,6 +46,7 @@ class ApplicationController extends Controller
     public function getServiceCost($id)
     {
         $service = Service::find($id);
+
         return response()->json([
             'service' => $service
         ]);
@@ -51,19 +59,19 @@ class ApplicationController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'application_no' => 'required|unique:applications',
-            'cost'           => 'required',
-            'service'        => 'required',
-            'client'         => 'required',
-            'police_station' => 'required',
-            'date'           => 'required',
+            'application_no'    => 'required|unique:applications',
+            'cost'              => 'required',
+            'service'           => 'required',
+            'client'            => 'required',
+            'police_station'    => 'required',
+            'date'              => 'required',
         ]);
 
         Application::create([
             'application_no'    => $request->application_no,
             'cost'              => $request->cost,
-            'service_id'           => $request->service,
-            'client_id'            => $request->client,
+            'service_id'        => $request->service,
+            'client_id'         => $request->client,
             'police_station'    => $request->police_station,
             'date'              => $request->date,
         ]);

@@ -5,20 +5,20 @@
     import { ref,watch,reactive } from 'vue';
     import {debounce} from 'lodash'
 
-    // const props = defineProps({
-    //     services : {Object}
-    // });
+    const props = defineProps({
+        applications : {Object}
+    });
 
     const searchInput = reactive({
         input : '',
         select : 20,
     });
 
-    // watch(searchInput, debounce(()=> router.get(route('service.index'),searchInput,{
-    //     preserveScroll:true,
-    //     preserveState:true
-    // },
-    // ),500));
+    watch(searchInput, debounce(()=> router.get(route('application.index'),searchInput,{
+        preserveScroll:true,
+        preserveState:true
+    },
+    ),500));
 
 </script>
 
@@ -59,7 +59,7 @@
                 <Link :href="route('application.create')" class="btn-primary" data-hs-overlay="#createModal">Create Application</Link>
             </div>
 
-            <!-- <div class="flex flex-col">
+            <div class="flex flex-col">
                 <div class="-m-1.5 overflow-x-auto">
                     <div class="p-1.5 min-w-full inline-block align-middle">
                         <div class="border rounded-lg divide-y divide-gray-200 dark:border-gray-700 dark:divide-gray-700">
@@ -99,16 +99,22 @@
                                                 Sl</th>
                                             <th scope="col"
                                                 class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
-                                                Name</th>
+                                                Application No.</th>
                                             <th scope="col"
                                                 class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
-                                                Code</th>
+                                                Service Name</th>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
+                                                Client Name</th>
                                             <th scope="col"
                                                 class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
                                                 Cost</th>
                                             <th scope="col"
                                                 class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
-                                                Status</th>
+                                                Police Station</th>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
+                                                Date</th>
                                             <th scope="col" width="10%"
                                                 class="px-6 py-3 text-center text-sm font-medium text-gray-500 dark:text-gray-400 uppercase ">
                                                 Action</th>
@@ -116,26 +122,30 @@
                                     </thead>
 
                                     <tbody class="divide-y divide-gray-300 dark:divide-gray-700">
-                                        <tr v-for="(service, index) in services.data" :key="index">
+                                        <tr v-for="(application, index) in applications.data" :key="index">
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-400"> {{ index+1 }}</td>
                                             
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
-                                                {{ service.name }}</td>
+                                                {{ application.application_no }}</td>
 
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                                {{ service.code }}</td>
+                                                {{ application.service.name }}</td>
 
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                                {{ service.cost }}</td>
+                                                {{ application.client.name }}</td>
 
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                                <span v-if="service.status === 'active'" class="badge-success dark:outline-success">Actice</span>
-                                                <span v-else class="badge-danger dark:outline-danger">Inactive</span>
-                                            </td>
+                                                {{ application.cost }}</td>
+
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                                                {{ application.police_station }}</td>
+
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                                                {{ application.date }}</td>
 
                                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium space-x-3">
-                                               <Link :href="route('service.update', {'service': service.id})" method="delete" preserve-scroll="true" preserve-state="true" type="button" as="button" class="py-2 px-3 bg-red-600 text-white rounded-md dark:outline-danger">Delete</Link>
-                                               <Link :href="route('service.edit', {'service':service.slug})" preserve-scroll preserve-state class="py-2 px-3 bg-blue-600 text-white rounded-md dark:outline-primary">Edit</Link>
+                                               <Link :href="route('application.destroy', application.id)" method="delete" preserve-scroll preserve-state type="button" as="button" class="py-2 px-3 bg-red-600 text-white rounded-md dark:outline-danger">Delete</Link>
+                                               <Link :href="route('application.edit', application.id)" class="py-2 px-3 bg-blue-600 text-white rounded-md dark:outline-primary">Edit</Link>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -144,7 +154,7 @@
 
                             <div class="py-3 px-4">
                                 <nav class="flex items-center space-x-2">
-                                    <Link :href="link.url" preserve-scroll preserve-state :class="{'bg-gray-300 dark:bg-[#141b2b] dark:text-blue-800':link.active == true}" v-for="(link, index) in services.links" :key="index"
+                                    <Link :href="link.url" :class="{'bg-gray-300 dark:bg-[#141b2b] dark:text-blue-800':link.active == true}" v-for="(link, index) in applications.links" :key="index"
                                         class="py-2 px-3 inline-flex items-center text-sm rounded-full text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white dark:hover:text-blue-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                                         <span aria-hidden="true" v-html="link.label"></span>
                                     </Link>
@@ -154,7 +164,7 @@
                         </div>
                     </div>
                 </div>
-            </div> -->
+            </div>
         </div>
 
 

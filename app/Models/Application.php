@@ -22,6 +22,13 @@ class Application extends Model
     ];
 
 
+    public function scopeSearch($query, $search)
+    {
+       return $query->where('application_no', 'Like', '%'. $search .'%')
+                    ->orWhere('police_station', 'Like', '%'. $search .'%');
+    }
+
+
     public function client()
     {
         return $this->belongsTo(Client::class, 'client_id');
