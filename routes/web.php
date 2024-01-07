@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
@@ -35,6 +36,8 @@ Route::get('/dashboard', function () {
 Route::group(['middleware' => ['auth', 'verified']],function(){
     Route::resource('service',ServiceController::class);
     Route::resource('client', ClientController::class);
+    Route::resource('application', ApplicationController::class);
+    Route::get('service-cost/{id}', [ApplicationController::class, 'getServiceCost'])->name('service.cost');
 });
 
 
