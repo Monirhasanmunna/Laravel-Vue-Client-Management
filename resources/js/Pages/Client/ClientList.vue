@@ -138,11 +138,16 @@
                                                <Link :href="route('client.edit', {'client':client.id})" preserve-scroll preserve-state class="py-2 px-3 bg-blue-600 text-white rounded-md dark:outline-primary">Edit</Link>
                                             </td>
                                         </tr>
+
+                                        <tr v-if="!clients.data.length > 0">
+                                            <td class="text-gray-600 dark:text-gray-100 text-center text-sm py-3" colspan="8">No data found</td>
+                                        </tr>
+
                                     </tbody>
                                 </table>
                             </div>
 
-                            <div class="py-3 px-4">
+                            <div class="py-3 px-4" v-if="clients.data.length > 0">
                                 <nav class="flex items-center space-x-2">
                                     <Link :href="link.url" preserve-scroll preserve-state :class="{'bg-gray-300 dark:bg-[#141b2b] dark:text-blue-800':link.active == true}" v-for="(link, index) in clients.links" :key="index"
                                         class="py-2 px-3 inline-flex items-center text-sm rounded-full text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white dark:hover:text-blue-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
