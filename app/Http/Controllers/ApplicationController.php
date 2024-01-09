@@ -20,7 +20,19 @@ class ApplicationController extends Controller
         $input = $request->input('input');
         $items = $request->input('select');
 
-        $applications = Application::with(['service','client'])->Search($input)->orderByDesc('id')->paginate($items);
+        $filterDates = [
+            'fromDate' => $request->input('fromDate'),
+            'toDate' => $request->input('toDate'),
+        ];
+
+        $query = Application::query();
+
+        if($request->fromDate != null && $request->toDate != null){
+            $query->SearchByDates($filterDates);
+        }
+
+        $applications = $query->with(['service','client'])->Search($input)->orderByDesc('id')->paginate($items);
+
 
         return Inertia::render('Application/Index',[
             'applications' => $applications

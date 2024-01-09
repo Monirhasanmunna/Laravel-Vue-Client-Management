@@ -62,7 +62,7 @@
                     <div class="form-wrapper space-y-4">
                         <div class="input-row flex gap-3 flex-col md:flex-row">
                             <div class="group shrink w-full">
-                                <label for="name" class="block text-sm text-gray-500 font-medium mb-2 dark:text-white">Name</label>
+                                <label for="name" class="label">Name</label>
                                 <input type="text" id="name" v-model="form.name" class="input w-full" placeholder="Enter Service Name">
                                 <p v-if="form.errors.name" class="text-sm text-red-600">{{ form.errors.name }}</p>
                             </div>
@@ -70,12 +70,12 @@
 
                         <div class="input-row flex gap-3 flex-col md:flex-row">
                             <div class="group shrink w-6/12">
-                                <label for="age" class="block text-sm text-gray-500 font-medium mb-2 dark:text-white">Age</label>
+                                <label for="age" class="label">Age</label>
                                 <input type="number" id="age" v-model="form.age" class="input w-full" placeholder="Enter Age">
                                 <p v-if="form.errors.age" class="text-sm text-red-600">{{ form.errors.age }}</p>
                             </div>
                             <div class="group shrink md:w-6/12">
-                                <label for="gender" class="block text-sm text-gray-500 font-medium mb-2 dark:text-white">Gender</label>
+                                <label for="gender" class="label">Gender</label>
                                 <select name="gender" id="status" class="input w-full" v-model="form.gender">
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
@@ -86,12 +86,12 @@
 
                         <div class="input-row flex gap-3 flex-col md:flex-row">
                             <div class="group shrink w-6/12">
-                                <label for="phone" class="block text-sm text-gray-500 font-medium mb-2 dark:text-white">Phone</label>
+                                <label for="phone" class="label">Phone</label>
                                 <input type="number" id="phone" v-model="form.phone" class="input w-full" placeholder="Enter Phone">
                                 <p v-if="form.errors.phone" class="text-sm text-red-600">{{ form.errors.phone }}</p>
                             </div>
                             <div class="group shrink w-6/12">
-                                <label for="address" class="block text-sm text-gray-500 font-medium mb-2 dark:text-white">Address</label>
+                                <label for="address" class="label">Address</label>
                                 <input type="text" id="address" v-model="form.address" class="input w-full" placeholder="Enter Address">
                                 <p v-if="form.errors.address" class="text-sm text-red-600">{{ form.errors.address }}</p>
                             </div>

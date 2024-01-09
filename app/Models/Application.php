@@ -28,6 +28,11 @@ class Application extends Model
                     ->orWhere('police_station', 'Like', '%'. $search .'%');
     }
 
+    public function scopeSearchByDates($query, $dates)
+    {
+       return $query->whereBetween('date', [$dates['fromDate'], $dates['toDate']]);
+    }
+
 
     public function client()
     {

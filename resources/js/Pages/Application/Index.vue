@@ -1,6 +1,7 @@
 <script setup>
     import { Link,router } from '@inertiajs/vue3';
     import MainLayout from '@/Layouts/MainLayout.vue'
+    import DataFilterByDate from '@/Components/DataFilterByDate.vue';
     import Toast from '@/Components/Toast.vue';
     import { ref,watch,reactive } from 'vue';
     import {debounce} from 'lodash'
@@ -19,6 +20,14 @@
         preserveState:true
     },
     ),500));
+
+
+    const searchDataByDate = (dateFilter) => {
+        router.get(route('application.index'),dateFilter,{
+            preserveScroll:true,
+            preserveState:true
+        });
+    }
 
 </script>
 
@@ -64,13 +73,16 @@
                     <div class="p-1.5 min-w-full inline-block align-middle">
                         <div class="border rounded-lg divide-y divide-gray-200 dark:border-gray-700 dark:divide-gray-700">
                             <div class="py-3 px-4 flex justify-between">
-
                                 <div class="inputDropdown">
                                     <select id="select" v-model="searchInput.select" class="input w-32 py-2 rounded-sm">
                                         <option value="10">10</option>
                                         <option value="20">20</option>
                                         <option value="50">50</option>
                                     </select>
+                                </div>
+
+                                <div class="searchByDate">
+                                    <DataFilterByDate @searchDataByDate="searchDataByDate"  />
                                 </div>
 
                                 <div class="relative max-w-xs">

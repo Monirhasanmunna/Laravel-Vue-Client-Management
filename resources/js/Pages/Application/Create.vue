@@ -74,12 +74,12 @@
                     <div class="form-wrapper space-y-4">
                         <div class="input-row flex gap-3 flex-col md:flex-row">
                             <div class="group shrink  md:w-2/12">
-                                <label for="application_no" class="block text-sm text-gray-500 font-medium mb-2 dark:text-white">Application No</label>
+                                <label for="application_no" class="label">Application No</label>
                                 <input type="text" readonly id="application_no" v-model="form.application_no" class="input w-full">
                             </div>
 
                             <div class="group shrink md:w-5/12">
-                                <label for="client" class="block text-sm text-gray-500 font-medium mb-2 dark:text-white">Client</label>
+                                <label for="client" class="label">Client</label>
                                 <select name="client" id="client" class="input w-full" v-model="form.client">
                                     <option disabled hidden value="">Chose Once</option>
                                     <option v-for="(client, index) in clients" :key="index" :value="client.id">{{ client.name }}</option>
@@ -87,7 +87,7 @@
                             </div>
 
                             <div class="group shrink md:w-5/12">
-                                <label for="status" class="block text-sm text-gray-500 font-medium mb-2 dark:text-white">Service</label>
+                                <label for="status" class="label">Service</label>
                                 <select name="status" id="status" class="input w-full" v-model="form.service">
                                     <option disabled hidden value="">Choose One</option>
                                     <option v-for="(service, index) in services" :key="index" :value="service.id">{{ service.name }}</option>
@@ -98,17 +98,17 @@
 
                         <div class="input-row flex gap-3 flex-col md:flex-row">
                             <div class="group shrink md:w-4/12">
-                                <label for="cost" class="block text-sm text-gray-500 font-medium mb-2 dark:text-white">Cost</label>
+                                <label for="cost" class="label">Cost</label>
                                 <input type="number" id="cost" v-model="form.cost" class="input w-full" placeholder="Enter Service Cost">
                                 <p v-if="form.errors.cost" class="text-sm text-red-600">{{ form.errors.cost }}</p>
                             </div>
                             <div class="group shrink md:w-4/12">
-                                <label for="police_station" class="block text-sm text-gray-500 font-medium mb-2 dark:text-white">Police Station</label>
+                                <label for="police_station" class="label">Police Station</label>
                                 <input type="text" id="police_station" v-model="form.police_station" class="input w-full" placeholder="Enter Police Station">
                                 <p v-if="form.errors.police_station" class="text-sm text-red-600">{{ form.errors.police_station }}</p>
                             </div>
                             <div class="group shrink md:w-4/12">
-                                <label for="date" class="block text-sm text-gray-500 font-medium mb-2 dark:text-white">Date</label>
+                                <label for="date" class="label">Date</label>
                                 <input type="date" id="date" v-model="form.date" class="input w-full" >
                                 <p v-if="form.errors.date" class="text-sm text-red-600">{{ form.errors.date }}</p>
                             </div>
