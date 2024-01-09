@@ -29,7 +29,7 @@
         <!-- Breadcrumb -->
         <div class="flex items-center justify-between">
             <div>
-                <h3 class="dark:text-gray-100">Service List</h3>
+                <h3 class="dark:text-gray-100">Client List</h3>
             </div>
 
             <ol class="flex items-center justify-end whitespace-nowrap" aria-label="Breadcrumb">
@@ -46,7 +46,7 @@
 
                 <li class="inline-flex items-center text-sm font-semibold text-gray-800 truncate dark:text-gray-200"
                     aria-current="page">
-                    Service List
+                    Client List
                 </li>
             </ol>
         </div>
@@ -54,7 +54,7 @@
 
         <div class="card space-y-6">
             <div class="flex justify-between items-center">
-                <h3>Service List</h3>
+                <h3>Client List</h3>
                 <Link :href="route('client.create')" class="btn-primary" data-hs-overlay="#createModal">Create Client</Link>
             </div>
 
