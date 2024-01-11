@@ -37,7 +37,7 @@ const page = usePage();
             <ul class="pt-2 px-2 space-y-1">
 
               <li>
-                <Link :href="route('application.index')" class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" :class="{'bg-gray-200 dark:bg-gray-800': $page.url === '/application' || $page.url.startsWith('/application?')}">
+                <Link :href="route('application.index')" class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" :class="{'bg-gray-200 dark:bg-gray-800': $page.url === '/application' || $page.url.includes('/edit') || $page.url.startsWith('/application?')}">
                   Application List
                 </Link>
               </li>
@@ -69,7 +69,7 @@ const page = usePage();
             <ul class="pt-2 px-2 space-y-1">
 
               <li>
-                <Link :href="route('service.index')" class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" :class="{'bg-gray-200 dark:bg-gray-800': $page.url === '/service' || $page.url.startsWith('/service?')}">
+                <Link :href="route('service.index')" class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" :class="{'bg-gray-200 dark:bg-gray-800': $page.url === '/service' || $page.url.includes('/edit') || $page.url.startsWith('/service?')}">
                   Service List
                 </Link>
               </li>
@@ -98,7 +98,7 @@ const page = usePage();
             <ul class="pt-2 px-2 space-y-1">
 
               <li>
-                <Link :href="route('client.index')" class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" :class="{'bg-gray-200 dark:bg-gray-800': $page.url === '/client' || $page.url.startsWith('/client?')}">
+                <Link :href="route('client.index')" class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" :class="{'bg-gray-200 dark:bg-gray-800': $page.url === '/client' || $page.url.includes('/edit') || $page.url.startsWith('/client?')}">
                   Client List
                 </Link>
               </li>
