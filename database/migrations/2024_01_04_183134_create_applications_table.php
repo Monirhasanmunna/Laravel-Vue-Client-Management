@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('application_no')->unique();
             $table->string('police_station');
             $table->bigInteger('cost');
+            $table->bigInteger('payment')->nullable();
+            $table->bigInteger('due')->nullable();
             $table->date('date');
             $table->timestamp('time')->default(now());
             $table->timestamps();

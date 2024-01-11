@@ -123,6 +123,12 @@
                                                 Cost</th>
                                             <th scope="col"
                                                 class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
+                                                Payment</th>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
+                                                Due</th>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
                                                 Police Station</th>
                                             <th scope="col"
                                                 class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
@@ -148,6 +154,12 @@
 
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
                                                 {{ application.cost }}</td>
+
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                                                {{ application.payment }}</td>
+
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                                                {{ application.due }}</td>
 
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
                                                 {{ application.police_station }}</td>

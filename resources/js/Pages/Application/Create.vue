@@ -1,6 +1,6 @@
 <script setup>
     import MainLayout from '@/Layouts/MainLayout.vue'
-    import {watch, ref} from 'vue';
+    import {watch, ref, computed, onMounted} from 'vue';
     import { Link, useForm, router } from '@inertiajs/vue3';
     import {debounce} from 'lodash';
     import axios from 'axios';
@@ -17,6 +17,8 @@
         service         : '',
         client          : '',
         police_station  : '',
+        payment         : '',
+        due             : '',
         date            : new Date().toISOString().substr(0, 10),
     });
 
@@ -26,7 +28,18 @@
         .then((res)=> form.cost = res.data.service.cost);
     });
 
-    
+
+    watch([()=> form.payment, ()=>form.cost], ()=> {
+        if(form.payment <= form.cost){
+            const calculateDue = computed(()=> form.cost - form.payment);
+            form.due = calculateDue.value;
+        }else{
+            alert('Can not payment mor that service cost');
+            form.payment = '';
+        }
+    });
+
+
     const formSubmit = ()=>{
         form.post(route('application.store'), {
             preserveScroll : true,
@@ -78,7 +91,7 @@
                                 <input type="text" readonly id="application_no" v-model="form.application_no" class="input w-full">
                             </div>
 
-                            <div class="group shrink md:w-5/12">
+                            <div class="group shrink md:w-4/12">
                                 <label for="client" class="label">Client</label>
                                 <select name="client" id="client" class="input w-full" v-model="form.client">
                                     <option disabled hidden value="">Chose Once</option>
@@ -86,7 +99,7 @@
                                 </select>
                             </div>
 
-                            <div class="group shrink md:w-5/12">
+                            <div class="group shrink md:w-4/12">
                                 <label for="status" class="label">Service</label>
                                 <select name="status" id="status" class="input w-full" v-model="form.service">
                                     <option disabled hidden value="">Choose One</option>
@@ -94,20 +107,33 @@
                                 </select>
                                 <p v-if="form.errors.service" class="text-sm text-red-600">{{ form.errors.service }}</p>
                             </div>
+
+                            <div class="group shrink md:w-4/12">
+                                <label for="cost" class="label">Cost</label>
+                                <input type="number" id="cost" v-model="form.cost" class="input w-full bg-gray-200 dark:bg-gray-900 dark:text-gray-100" readonly >
+                                <p v-if="form.errors.cost" class="text-sm text-red-600">{{ form.errors.cost }}</p>
+                            </div>
+
                         </div>
 
                         <div class="input-row flex gap-3 flex-col md:flex-row">
                             <div class="group shrink md:w-4/12">
-                                <label for="cost" class="label">Cost</label>
-                                <input type="number" id="cost" v-model="form.cost" class="input w-full" placeholder="Enter Service Cost">
-                                <p v-if="form.errors.cost" class="text-sm text-red-600">{{ form.errors.cost }}</p>
+                                <label for="payment" class="label">Payment</label>
+                                <input type="number" id="payment" v-model="form.payment" class="input w-full" placeholder="Enter Amount">
+                                <p v-if="form.errors.payment" class="text-sm text-red-600">{{ form.errors.payment }}</p>
                             </div>
+
                             <div class="group shrink md:w-4/12">
+                                <label for="due" class="label">Due</label>
+                                <input type="number" id="due" v-model="form.due" class="input w-full bg-gray-200 dark:bg-gray-900 dark:text-gray-100" readonly>
+                            </div>
+
+                            <div class="group shrink md:w-3/12">
                                 <label for="police_station" class="label">Police Station</label>
                                 <input type="text" id="police_station" v-model="form.police_station" class="input w-full" placeholder="Enter Police Station">
                                 <p v-if="form.errors.police_station" class="text-sm text-red-600">{{ form.errors.police_station }}</p>
                             </div>
-                            <div class="group shrink md:w-4/12">
+                            <div class="group shrink md:w-3/12">
                                 <label for="date" class="label">Date</label>
                                 <input type="date" id="date" v-model="form.date" class="input w-full" >
                                 <p v-if="form.errors.date" class="text-sm text-red-600">{{ form.errors.date }}</p>

@@ -8,7 +8,7 @@ use App\Models\Service;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Helpers\ApplicationIDHelper;
-
+use Illuminate\Support\Facades\Redirect;
 
 class ApplicationController extends Controller
 {
@@ -77,6 +77,7 @@ class ApplicationController extends Controller
             'client'            => 'required',
             'police_station'    => 'required',
             'date'              => 'required',
+            'payment'           => 'required',
         ]);
 
         Application::create([
@@ -86,6 +87,8 @@ class ApplicationController extends Controller
             'client_id'         => $request->client,
             'police_station'    => $request->police_station,
             'date'              => $request->date,
+            'payment'           => $request->payment,
+            'due'               => $request->due,
         ]);
 
         return to_route('application.index')->with('success', 'Application created successfully');
@@ -104,7 +107,14 @@ class ApplicationController extends Controller
      */
     public function edit(Application $application)
     {
-        //
+        $clients = Client::all();
+        $services = Service::all();
+
+        return Inertia::render('Application/Edit',[
+            'clients'  => $clients,
+            'services' => $services,
+            'application' => $application
+        ]);
     }
 
     /**
@@ -112,7 +122,29 @@ class ApplicationController extends Controller
      */
     public function update(Request $request, Application $application)
     {
-        //
+        // dd($request->all());
+        $request->validate([
+            'application_no'    => 'required|unique:applications,application_no,'.$application->id,
+            'cost'              => 'required',
+            'service'           => 'required',
+            'client'            => 'required',
+            'police_station'    => 'required',
+            'date'              => 'required',
+            'payment'           => 'required',
+        ]);
+
+        $application->update([
+            'application_no'    => $request->application_no,
+            'cost'              => $request->cost,
+            'service_id'        => $request->service,
+            'client_id'         => $request->client,
+            'police_station'    => $request->police_station,
+            'date'              => $request->date,
+            'payment'           => $request->payment,
+            'due'               => $request->due,
+        ]);
+
+        return to_route('application.index')->with('success', 'Application updated successfully');
     }
 
     /**
@@ -120,6 +152,7 @@ class ApplicationController extends Controller
      */
     public function destroy(Application $application)
     {
-        //
+        $application->delete();
+        return Redirect::back()->with('success', 'Application deleted successfully');
     }
 }
