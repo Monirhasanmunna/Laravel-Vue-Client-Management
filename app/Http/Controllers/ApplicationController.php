@@ -78,6 +78,7 @@ class ApplicationController extends Controller
             'police_station'    => 'required',
             'date'              => 'required',
             'payment'           => 'required',
+
         ]);
 
         Application::create([

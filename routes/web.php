@@ -3,6 +3,7 @@
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Report\AccountController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,7 @@ Route::group(['middleware' => ['auth', 'verified']],function(){
     Route::resource('client', ClientController::class);
     Route::resource('application', ApplicationController::class);
     Route::get('service-cost/{id}', [ApplicationController::class, 'getServiceCost'])->name('service.cost');
+    Route::resource('reports/account', AccountController::class);
 });
 
 

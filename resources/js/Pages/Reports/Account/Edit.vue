@@ -8,18 +8,18 @@
     const props = defineProps({
         services : Array,
         clients  : Array,
-        application_id : String,
+        application : Object,
     });
     
     const form = useForm({
-        application_no  : props.application_id,
-        cost            : '',
-        service         : '',
-        client          : '',
-        police_station  : '',
-        payment         : '',
-        due             : '',
-        date            : new Date().toISOString().substr(0, 10),
+        application_no  : props.application.application_no,
+        cost            : props.application.cost,
+        service         : props.application.service_id,
+        client          : props.application.client_id,
+        police_station  : props.application.police_station,
+        payment         : props.application.payment,
+        due             : props.application.due,
+        date            : props.application.date,
     });
 
 
@@ -41,7 +41,7 @@
 
 
     const formSubmit = ()=>{
-        form.post(route('application.store'), {
+        form.put(route('application.update', props.application.id), {
             preserveScroll : true,
         });
     }
@@ -52,7 +52,7 @@
         <!-- Breadcrumb -->
         <div class="flex items-center justify-between">
             <div>
-                <h3 class="dark:text-gray-100">Application Create</h3>
+                <h3 class="dark:text-gray-100">Application Edit</h3>
             </div>
 
             <ol class="flex items-center justify-end whitespace-nowrap" aria-label="Breadcrumb">
@@ -69,7 +69,7 @@
 
                 <li class="inline-flex items-center text-sm font-semibold text-gray-800 truncate dark:text-gray-200"
                     aria-current="page">
-                    Application Create
+                    Application Edit
                 </li>
             </ol>
         </div>
@@ -97,7 +97,6 @@
                                     <option disabled hidden value="">Chose Once</option>
                                     <option v-for="(client, index) in clients" :key="index" :value="client.id">{{ client.name }}</option>
                                 </select>
-                                <p v-if="form.errors.client" class="text-sm text-red-600">{{ form.errors.client }}</p>
                             </div>
 
                             <div class="group shrink md:w-4/12">
@@ -142,7 +141,7 @@
                         </div>
 
                         <div class="input-row pt-4">
-                            <button type="submit" class="btn-primary dark:outile-primary">Submit</button>
+                            <button type="submit" class="btn-primary dark:outile-primary">Update</button>
                         </div>
                     </div>
                 </form>
