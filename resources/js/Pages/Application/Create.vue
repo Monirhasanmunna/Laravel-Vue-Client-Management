@@ -22,6 +22,7 @@
         due             : '',
         account         : '',
         date            : new Date().toISOString().substr(0, 10),
+        status          : 'received',
     });
 
 
@@ -151,6 +152,15 @@
                                     <option v-for="(account, index) in accounts" :key="index" :value="account.id">{{ account.account_name }}</option>
                                 </select>
                                 <p v-if="form.errors.account" class="text-sm text-red-600">{{ form.errors.account }}</p>
+                            </div>
+
+                            <div class="group shrink md:w-3/12 pr-2">
+                                <label for="status" class="label">Status</label>
+                                <select name="status" id="status" class="input w-full" v-model="form.status">
+                                    <option value="received">Received</option>
+                                    <option value="processing">Processing</option>
+                                    <option value="Deliver">Deliver</option>
+                                </select>
                             </div>
                         </div>
 

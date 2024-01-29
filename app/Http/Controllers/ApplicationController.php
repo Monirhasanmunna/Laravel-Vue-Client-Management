@@ -33,7 +33,7 @@ class ApplicationController extends Controller
             $query->SearchByDates($filterDates);
         }
 
-        $applications = $query->with(['service','client'])->Search($input)->orderByDesc('id')->paginate($items);
+        $applications = $query->with(['service','client','account'])->Search($input)->orderByDesc('id')->paginate($items);
 
 
         return Inertia::render('Application/Index',[
@@ -84,7 +84,7 @@ class ApplicationController extends Controller
             'police_station'    => 'required',
             'date'              => 'required',
             'payment'           => 'required',
-            'account'           => 'required'
+            'account'           => 'required',
         ]);
 
         
@@ -98,6 +98,7 @@ class ApplicationController extends Controller
             'date'              => $request->date,
             'payment'           => $request->payment,
             'due'               => $request->due,
+            'status'            => $request->status,
         ]);
 
         $account->paymentCreate($request->account, $request->payment);
@@ -158,6 +159,7 @@ class ApplicationController extends Controller
             'date'              => $request->date,
             'payment'           => $request->payment,
             'due'               => $request->due,
+            'status'            => $request->status,
         ]);
 
         $account->paymentCreate($request->account, $application->payment);

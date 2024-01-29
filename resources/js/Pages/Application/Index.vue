@@ -129,10 +129,16 @@
                                                 Due</th>
                                             <th scope="col"
                                                 class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
+                                                Account</th>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
                                                 Police Station</th>
                                             <th scope="col"
                                                 class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
                                                 Date</th>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
+                                                Status</th>
                                             <th scope="col" width="10%"
                                                 class="px-6 py-3 text-center text-sm font-medium text-gray-500 dark:text-gray-400 uppercase ">
                                                 Action</th>
@@ -161,11 +167,18 @@
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
                                                 {{ application.due }}</td>
 
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200 ">
+                                               <span class="badge-green dark:outline-green">{{ application.account.account_name }}</span>
+                                            </td>
+
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
                                                 {{ application.police_station }}</td>
 
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
                                                 {{ application.date }}</td>
+
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200 uppercase">
+                                                {{ application.status }}</td>
 
                                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium space-x-3">
                                                <Link :href="route('application.destroy', application.id)" method="delete" preserve-scroll preserve-state type="button" as="button" class="py-2 px-3 bg-red-600 text-white rounded-md dark:outline-danger">Delete</Link>

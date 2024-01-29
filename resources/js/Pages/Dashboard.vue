@@ -20,7 +20,11 @@
         <!-- Breadcrumb -->
 
         <div class="card">
-            <h2>Dashboard</h2>
+            <div class="grid grid-cols-5">
+                <div class="box border-gray-500 dark:border-gray-200 gap-4 p-2 bg-white">
+                    
+                </div>
+            </div>
         </div>
     </MainLayout>
 </template>

@@ -19,7 +19,8 @@ class Application extends Model
         'payment',
         'due',
         'date', 
-        'time', 
+        'time',
+        'status',
         'created_at', 
         'updated_at'
     ];
@@ -28,7 +29,8 @@ class Application extends Model
     public function scopeSearch($query, $search)
     {
        return $query->where('application_no', 'Like', '%'. $search .'%')
-                    ->orWhere('police_station', 'Like', '%'. $search .'%');
+                    ->orWhere('police_station', 'Like', '%'. $search .'%')
+                    ->orWhere('status', 'Like', '%'. $search .'%');
     }
 
     public function scopeSearchByDates($query, $dates)
@@ -46,5 +48,11 @@ class Application extends Model
     public function service()
     {
         return $this->belongsTo(Service::class, 'service_id');
+    }
+
+    
+    public function account()
+    {
+        return $this->belongsTo(Account::class, 'account_id');
     }
 }

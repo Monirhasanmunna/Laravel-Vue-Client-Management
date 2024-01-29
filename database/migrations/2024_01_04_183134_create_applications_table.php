@@ -24,6 +24,7 @@ return new class extends Migration
             $table->bigInteger('due')->nullable();
             $table->date('date');
             $table->timestamp('time')->default(now());
+            $table->enum('status', ['received', 'processing', 'deliver'])->default('received');
             $table->timestamps();
         });
     }
