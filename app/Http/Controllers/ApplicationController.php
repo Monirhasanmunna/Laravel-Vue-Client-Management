@@ -8,6 +8,8 @@ use App\Models\Service;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Helpers\ApplicationIDHelper;
+use App\Models\Account;
+use App\Services\AccountServices;
 use Illuminate\Support\Facades\Redirect;
 
 class ApplicationController extends Controller
@@ -46,12 +48,14 @@ class ApplicationController extends Controller
     {
         $clients = Client::all();
         $services = Service::all();
+        $accounts = Account::where('status', 'active')->get();
         $application_id = ApplicationIDHelper::ApplicationId();
 
         return Inertia::render('Application/Create',[
             'clients'  => $clients,
             'services' => $services,
             'application_id' => $application_id,
+            'accounts' => $accounts
         ]);
     }
 
@@ -68,8 +72,10 @@ class ApplicationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, AccountServices $account)
     {
+
+        // dd($request->all());
         $request->validate([
             'application_no'    => 'required|unique:applications',
             'cost'              => 'required',
@@ -78,11 +84,13 @@ class ApplicationController extends Controller
             'police_station'    => 'required',
             'date'              => 'required',
             'payment'           => 'required',
-
+            'account'           => 'required'
         ]);
 
+        
         Application::create([
             'application_no'    => $request->application_no,
+            'account_id'        => $request->account,
             'cost'              => $request->cost,
             'service_id'        => $request->service,
             'client_id'         => $request->client,
@@ -91,6 +99,8 @@ class ApplicationController extends Controller
             'payment'           => $request->payment,
             'due'               => $request->due,
         ]);
+
+        $account->paymentCreate($request->account, $request->payment);
 
         return to_route('application.index')->with('success', 'Application created successfully');
     }
@@ -110,20 +120,21 @@ class ApplicationController extends Controller
     {
         $clients = Client::all();
         $services = Service::all();
+        $accounts = Account::where('status', 'active')->get();
 
         return Inertia::render('Application/Edit',[
             'clients'  => $clients,
             'services' => $services,
-            'application' => $application
+            'application' => $application,
+            'accounts'  => $accounts
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Application $application)
+    public function update(Request $request, Application $application, AccountServices $account)
     {
-        // dd($request->all());
         $request->validate([
             'application_no'    => 'required|unique:applications,application_no,'.$application->id,
             'cost'              => 'required',
@@ -132,10 +143,14 @@ class ApplicationController extends Controller
             'police_station'    => 'required',
             'date'              => 'required',
             'payment'           => 'required',
+            'account'           => 'required'
         ]);
+
+        $account->paymentRemove($request->account, $application->payment);
 
         $application->update([
             'application_no'    => $request->application_no,
+            'account_id'        => $request->account,
             'cost'              => $request->cost,
             'service_id'        => $request->service,
             'client_id'         => $request->client,
@@ -144,6 +159,8 @@ class ApplicationController extends Controller
             'payment'           => $request->payment,
             'due'               => $request->due,
         ]);
+
+        $account->paymentCreate($request->account, $application->payment);
 
         return to_route('application.index')->with('success', 'Application updated successfully');
     }

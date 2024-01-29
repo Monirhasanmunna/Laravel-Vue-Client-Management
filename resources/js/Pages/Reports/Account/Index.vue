@@ -54,7 +54,7 @@
 
         <div class="card space-y-6">
             <div class="flex justify-between items-center">
-                <h3>Application List</h3>
+                <h3>Account List</h3>
                 <!-- <Link :href="route('account.create')" class="btn-primary" data-hs-overlay="#createModal">Create Account</Link> -->
             </div>
 

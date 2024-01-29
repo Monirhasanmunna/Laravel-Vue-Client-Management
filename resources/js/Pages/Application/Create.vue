@@ -8,6 +8,7 @@
     const props = defineProps({
         services : Array,
         clients  : Array,
+        accounts  : Array,
         application_id : String,
     });
     
@@ -19,6 +20,7 @@
         police_station  : '',
         payment         : '',
         due             : '',
+        account         : '',
         date            : new Date().toISOString().substr(0, 10),
     });
 
@@ -118,13 +120,13 @@
                         </div>
 
                         <div class="input-row flex gap-3 flex-col md:flex-row">
-                            <div class="group shrink md:w-4/12">
+                            <div class="group shrink md:w-3/12">
                                 <label for="payment" class="label">Payment</label>
                                 <input type="number" id="payment" v-model="form.payment" class="input w-full" placeholder="Enter Amount">
                                 <p v-if="form.errors.payment" class="text-sm text-red-600">{{ form.errors.payment }}</p>
                             </div>
 
-                            <div class="group shrink md:w-4/12">
+                            <div class="group shrink md:w-3/12">
                                 <label for="due" class="label">Due</label>
                                 <input type="number" id="due" v-model="form.due" class="input w-full bg-gray-200 dark:bg-gray-900 dark:text-gray-100" readonly>
                             </div>
@@ -140,6 +142,18 @@
                                 <p v-if="form.errors.date" class="text-sm text-red-600">{{ form.errors.date }}</p>
                             </div>
                         </div>
+
+                        <div class="input-row flex gap-3 flex-col md:flex-row">
+                            <div class="group shrink md:w-3/12 pr-2">
+                                <label for="account" class="label">Account</label>
+                                <select name="account" id="account" class="input w-full" v-model="form.account">
+                                    <option disabled hidden value="">Chose Once</option>
+                                    <option v-for="(account, index) in accounts" :key="index" :value="account.id">{{ account.account_name }}</option>
+                                </select>
+                                <p v-if="form.errors.account" class="text-sm text-red-600">{{ form.errors.account }}</p>
+                            </div>
+                        </div>
+
 
                         <div class="input-row pt-4">
                             <button type="submit" class="btn-primary dark:outile-primary">Submit</button>

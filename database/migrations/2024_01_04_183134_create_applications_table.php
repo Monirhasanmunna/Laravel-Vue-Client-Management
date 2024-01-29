@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('client_id')->constrained('clients')->onDelete('cascade');
             $table->foreignId('service_id')->constrained('services')->onDelete('cascade');
+            $table->foreignId('account_id')->constrained('accounts')->onDelete('cascade');
             $table->string('application_no')->unique();
             $table->string('police_station');
             $table->bigInteger('cost');

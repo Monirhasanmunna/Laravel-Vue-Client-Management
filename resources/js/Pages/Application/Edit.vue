@@ -9,6 +9,7 @@
         services : Array,
         clients  : Array,
         application : Object,
+        accounts : Array
     });
     
     const form = useForm({
@@ -20,6 +21,7 @@
         payment         : props.application.payment,
         due             : props.application.due,
         date            : props.application.date,
+        account         : props.application.account_id,
     });
 
 
@@ -137,6 +139,17 @@
                                 <label for="date" class="label">Date</label>
                                 <input type="date" id="date" v-model="form.date" class="input w-full" >
                                 <p v-if="form.errors.date" class="text-sm text-red-600">{{ form.errors.date }}</p>
+                            </div>
+                        </div>
+
+                        <div class="input-row flex gap-3 flex-col md:flex-row">
+                            <div class="group shrink md:w-3/12 pr-2">
+                                <label for="account" class="label">Account</label>
+                                <select name="account" id="account" class="input w-full" v-model="form.account">
+                                    <option disabled hidden value="">Chose Once</option>
+                                    <option v-for="(account, index) in accounts" :key="index" :value="account.id">{{ account.account_name }}</option>
+                                </select>
+                                <p v-if="form.errors.account" class="text-sm text-red-600">{{ form.errors.account }}</p>
                             </div>
                         </div>
 

@@ -12,6 +12,7 @@ class Application extends Model
     protected $fillable= [
         'client_id', 
         'service_id', 
+        'account_id',
         'application_no', 
         'police_station', 
         'cost',
