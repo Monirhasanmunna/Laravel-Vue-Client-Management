@@ -56,10 +56,10 @@
                                     <!-- Checkbox -->
                                     <div class="flex items-center">
                                         <div class="flex">
-                                            <input id="remember-me" name="remember-me" type="checkbox" class="shrink-0 mt-0.5 border-gray-300 rounded text-blue-600 pointer-events-none focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
+                                            <input id="remember-me" name="remember-me" v-model.checked="form.remember" type="checkbox" class="shrink-0 mt-0.5 border-gray-300 rounded text-blue-600 pointer-events-none focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
                                         </div>
                                         <div class="ms-3">
-                                            <label for="remember-me" class="text-sm dark:text-white">Remember me</label>
+                                            <label for="remember-me"  class="text-sm dark:text-white">Remember me</label>
                                         </div>
                                     </div>
                                     <!-- End Checkbox -->
