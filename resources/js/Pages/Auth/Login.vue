@@ -19,7 +19,7 @@
 <template>
     <Head title="Login"/>
     <GuestLayout>
-        <div class="flex justify-center items-center w-[400px]">
+        <div class="flex justify-center items-center w-[500px]">
             <main class="w-full max-w-md mx-auto p-6">
                 <div
                     class="mt-7 bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
