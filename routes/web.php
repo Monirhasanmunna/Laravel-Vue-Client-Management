@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Report\AccountController;
 use App\Http\Controllers\ServiceController;
@@ -24,12 +25,11 @@ Route::get('/', function () {
     return Inertia::render('Auth/Login');
 })->middleware('guest');
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 
 Route::group(['middleware' => ['auth', 'verified']],function(){
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
     Route::resource('service',ServiceController::class);
     Route::resource('client', ClientController::class);
     Route::resource('application', ApplicationController::class);

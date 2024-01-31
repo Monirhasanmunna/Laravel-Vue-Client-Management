@@ -1,5 +1,28 @@
 <script setup>
     import MainLayout from '@/Layouts/MainLayout.vue';
+    import {Head, router, useForm} from '@inertiajs/vue3';
+    import {watch} from 'vue';
+    import {debounce} from 'lodash';
+
+   const props = defineProps({
+        totalReceivedApp    : { Number },
+        deleveryApplication : { Number },
+        receivedMoney       : { Number, default: 0 },
+        dueMoney            : { Number, default: 0 },
+    });
+
+    const filter = useForm({
+        select : 'today'
+    });
+
+    watch(()=>filter.select, debounce(() => {
+        router.get(route('dashboard'), filter, {
+            preserveScroll:true,
+            preserveState:true
+        });
+    }), 500);
+
+console.log(props.filter);
 </script>
 
 <template>
@@ -21,10 +44,10 @@
 
         <div class="card">
             <div class="pb-3 flex justify-between">
-                <h2>Report For Today</h2>
+                <h2></h2>
                 <div class="inputDropdown">
-                    <select id="select" class="input border-2 w-32 py-2 rounded-md">
-                        <option value="to-day">To day</option>
+                    <select id="select" v-model="filter.select" class="input border-2 w-32 py-2 rounded-md">
+                        <option value="today">Today</option>
                         <option value="last-7-days">Last 7 days</option>
                         <option value="this-month">This Month</option>
                         <option value="this-year">This Year</option>
@@ -33,9 +56,9 @@
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 sm:flex-row gap-4">
                 <div class="box border-gray-500 rounded-md dark:border-[#223154] bg-gradient-to-r from-indigo-500 to-sky-500 text-gray-50 p-2 flex justify-between w-full h-[120px] hover:scale-105 duration-500">
-                    <div class="left">
-                        <h4 class="">Received Application</h4>
-                        <h1 class="text-5xl">10</h1>
+                    <div class="left space-y-2">
+                        <h3 class="">Received Application</h3>
+                        <h1 class="text-4xl">{{ totalReceivedApp }}</h1>
                     </div>
                     <div class="right opacity-30">
                         <div class="w-full flex justify-end items-center h-full">
@@ -48,9 +71,9 @@
 
 
                 <div class="box border-gray-500 rounded-md dark:border-[#223154] bg-gradient-to-r from-indigo-500 to-sky-500 text-gray-50 p-2 flex justify-between w-full h-[120px] hover:scale-105 duration-500">
-                    <div class="left">
-                        <h4 class="">Received Application</h4>
-                        <h1 class="text-5xl">10</h1>
+                    <div class="left space-y-2">
+                        <h3 class="">Delivery</h3>
+                        <h1 class="text-4xl">{{ deleveryApplication }}</h1>
                     </div>
                     <div class="right opacity-30">
                         <div class="w-full flex justify-end items-center h-full">
@@ -63,9 +86,9 @@
 
 
                 <div class="box border-gray-500 rounded-md dark:border-[#223154] bg-gradient-to-r from-indigo-500 to-sky-500 text-gray-50 p-2 flex justify-between w-full h-[120px] hover:scale-105 duration-500">
-                    <div class="left">
-                        <h4 class="">Received Application</h4>
-                        <h1 class="text-5xl">10</h1>
+                    <div class="left space-y-2">
+                        <h3 class="">Received Money</h3>
+                        <h2 class="text-4xl">Tk.{{ receivedMoney }}</h2>
                     </div>
                     <div class="right opacity-30">
                         <div class="w-full flex justify-end items-center h-full">
@@ -77,9 +100,9 @@
                 </div>
 
                 <div class="box border-gray-500 rounded-md dark:border-[#223154] bg-gradient-to-r from-indigo-500 to-sky-500 text-gray-50 p-2 flex justify-between w-full h-[120px] hover:scale-105 duration-500">
-                    <div class="left">
-                        <h4 class="">Received Application</h4>
-                        <h1 class="text-5xl">10</h1>
+                    <div class="left space-y-2">
+                        <h2 class="">Due Money</h2>
+                        <h1 class="text-4xl">{{ dueMoney }}</h1>
                     </div>
                     <div class="right opacity-30">
                         <div class="w-full flex justify-end items-center h-full">
@@ -90,7 +113,6 @@
                     </div>
                 </div>
                 
-
             </div>
         </div>
     </MainLayout>

@@ -1,6 +1,21 @@
 <script setup>
 import {Link, Head, useForm} from '@inertiajs/vue3';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
+import {ref} from 'vue';
+
+const isDarkMode = ref(false);
+
+localStorage.theme === 'dark' ? isDarkMode.value = true : isDarkMode.value = false;
+
+if(localStorage.theme || isDarkMode.value == true && (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)){
+    localStorage.theme = 'dark'
+    document.documentElement.classList.add('dark')
+    isDarkMode.value == true;
+}else{
+    localStorage.removeItem('theme');
+    document.documentElement.classList.remove('dark')
+    isDarkMode.value == false
+}
 
 const form = useForm({
     name: '',
