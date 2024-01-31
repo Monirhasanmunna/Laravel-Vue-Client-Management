@@ -102,7 +102,7 @@ console.log(props.filter);
                 <div class="box border-gray-500 rounded-md dark:border-[#223154] bg-gradient-to-r from-indigo-500 to-sky-500 text-gray-50 p-2 flex justify-between w-full h-[120px] hover:scale-105 duration-500">
                     <div class="left space-y-2">
                         <h2 class="">Due Money</h2>
-                        <h1 class="text-4xl">{{ dueMoney }}</h1>
+                        <h1 class="text-4xl">Tk.{{ dueMoney }}</h1>
                     </div>
                     <div class="right opacity-30">
                         <div class="w-full flex justify-end items-center h-full">
