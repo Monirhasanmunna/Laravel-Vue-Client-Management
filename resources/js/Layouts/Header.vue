@@ -39,27 +39,20 @@ const isDarkMode = ref(false);
 </script>
 
 <template>
-    <header class="sticky top-0 inset-x-0 flex flex-wrap sm:justify-start sm:flex-nowrap z-[48] w-full bg-white border-b text-sm py-2.5 sm:py-4 lg:ps-64 dark:bg-gray-800 dark:border-gray-700">
+    <header class="sticky top-0 inset-x-0 flex flex-wrap sm:justify-start sm:flex-nowrap z-[48] w-full bg-white border-b text-sm py-2.5 sm:py-2.5 lg:ps-64 dark:bg-gray-800 dark:border-gray-700">
     <nav class="flex basis-full items-center w-full mx-auto px-4 sm:px-6 md:px-8" aria-label="Global">
-      <div class="me-5 lg:me-0 lg:hidden">
-        <a class="flex-none text-xl font-semibold dark:text-white" href="#" aria-label="Brand">Brand</a>
-      </div>
-
-      <div class="w-full flex items-center ms-auto justify-between sm:gap-x-3 sm:order-3">
-        <div class="hidden lg:block">
-          
-        </div>
-
-        <div class="lg:hidden">
-          <!-- Navigation Toggle -->
-            <button type="button" class="text-gray-500 hover:text-gray-600" data-hs-overlay="#application-sidebar" aria-controls="application-sidebar" aria-label="Toggle navigation">
+      <div class="w-[300px] lg:me-0 lg:hidden flex gap-4" >
+        <Link class="flex-none text-xl font-semibold text-gray-600 dark:text-gray-200" :href="route('dashboard')" aria-label="Brand">MDEV Dashboard</Link>
+      
+        <!-- Navigation Toggle -->
+        <button type="button" class="text-gray-500 hover:text-gray-600" data-hs-overlay="#application-sidebar" aria-controls="application-sidebar" aria-label="Toggle navigation">
                 <span class="sr-only">Toggle Navigation</span>
-                <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
+                <svg class="flex-shrink-0 " xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
             </button>
           <!-- End Navigation Toggle -->
-        </div>
+      </div>
 
-
+      <div class="w-full flex items-center ms-auto justify-end sm:gap-x-3 sm:order-3">
         <div class="flex flex-row items-center justify-end gap-2">
            <!-- Switch/Toggle -->
           <div class="relative inline-block">
