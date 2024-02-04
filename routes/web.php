@@ -3,6 +3,7 @@
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DueCollectionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Report\AccountController;
 use App\Http\Controllers\ServiceController;
@@ -35,6 +36,12 @@ Route::group(['middleware' => ['auth', 'verified']],function(){
     Route::resource('application', ApplicationController::class);
     Route::get('service-cost/{id}', [ApplicationController::class, 'getServiceCost'])->name('service.cost');
     Route::resource('reports/account', AccountController::class);
+
+    Route::group(['as'=>'collection.', 'prefix'=>'collection'],function(){
+        Route::get('/due',[DueCollectionController::class,'index'])->name('index');
+        Route::get('/due/{id}',[DueCollectionController::class,'getApplicationById'])->name('get-application');
+        Route::post('/due-payment',[DueCollectionController::class,'duePayment'])->name('due-payment');
+    });
 });
 
 

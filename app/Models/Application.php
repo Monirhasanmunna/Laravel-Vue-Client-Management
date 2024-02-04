@@ -38,6 +38,11 @@ class Application extends Model
        return $query->whereBetween('date', [$dates['fromDate'], $dates['toDate']]);
     }
 
+    public function scopeSearchByClient($query, $client_id)
+    {
+        return $query->where('client_id', 'Like', '%'. $client_id . '%');
+    }
+
 
     public function client()
     {
