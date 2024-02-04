@@ -160,10 +160,12 @@
 
                                             <th scope="col"
                                                 class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
-                                                Service</th>
+                                                Client</th>
+
                                             <th scope="col"
                                                 class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
-                                                Client</th>
+                                                Service</th>
+
                                             <th scope="col"
                                                 class="px-6 py-3 text-start text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
                                                 Ammount</th>
@@ -259,7 +261,7 @@
                             <div class="border-t sm:border-t-0 sm:border-s border-gray-200 dark:border-gray-700"></div>
 
                             <div class="right space-y-3">
-                                <div class="flex justify-between w-full bg-green-800 rounded-md p-2">
+                                <div class="flex justify-between w-full bg-green-800 text-gray-50 rounded-md p-2">
                                     <h6 class="text-[19px]">Due :</h6>
                                     <h6 class="text-[18px] ">{{ selectApplication.ammount }}</h6>
                                 </div>
