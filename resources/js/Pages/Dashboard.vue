@@ -22,7 +22,6 @@
         });
     }), 500);
 
-console.log(props.filter);
 </script>
 
 <template>

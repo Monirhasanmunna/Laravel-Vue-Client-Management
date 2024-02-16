@@ -170,9 +170,10 @@ class ApplicationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Application $application)
+    public function destroy(Application $application, AccountServices $account)
     {
+        $account->paymentRemove($application->account_id, $application->payment);
         $application->delete();
-        return Redirect::back()->with('success', 'Application deleted successfully');
+        return to_route('application.index')->with('success', 'Application deleted successfully');
     }
 }

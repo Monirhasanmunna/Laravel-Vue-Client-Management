@@ -114,7 +114,7 @@
 
                             <div class="group shrink md:w-4/12">
                                 <label for="cost" class="label">Cost</label>
-                                <input type="number" id="cost" v-model="form.cost" class="input w-full bg-gray-200 dark:bg-gray-900 dark:text-gray-100" readonly >
+                                <input type="number" id="cost" v-model="form.cost" class="input w-full focus:border-none focus:ring-0 bg-gray-200 dark:bg-gray-900 dark:text-gray-100" readonly >
                                 <p v-if="form.errors.cost" class="text-sm text-red-600">{{ form.errors.cost }}</p>
                             </div>
 
@@ -129,7 +129,7 @@
 
                             <div class="group shrink md:w-3/12">
                                 <label for="due" class="label">Due</label>
-                                <input type="number" id="due" v-model="form.due" class="input w-full bg-gray-200 dark:bg-gray-900 dark:text-gray-100" readonly>
+                                <input type="number" id="due" v-model="form.due" class="input w-full focus:border-none focus:ring-0 bg-gray-200 dark:bg-gray-900 dark:text-gray-100" readonly>
                             </div>
 
                             <div class="group shrink md:w-3/12">

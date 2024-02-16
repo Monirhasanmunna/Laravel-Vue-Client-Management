@@ -158,7 +158,7 @@
                                 <select name="status" id="status" class="input w-full" v-model="form.status">
                                     <option value="received">Received</option>
                                     <option value="processing">Processing</option>
-                                    <option value="Deliver">Deliver</option>
+                                    <option value="deliver">Deliver</option>
                                 </select>
                             </div>
                         </div>

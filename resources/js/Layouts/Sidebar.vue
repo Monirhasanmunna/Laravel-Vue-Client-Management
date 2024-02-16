@@ -12,7 +12,7 @@ const page = usePage();
 
     <div class="flex justify-between border-b border-gray-200 dark:border-gray-600 pl-6 pr-3 pb-[14px]  ">
       <div class="text-center">
-      <Link class="flex-none text-xl font-semibold text-gray-600 dark:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" :href="route('dashboard')" aria-label="Brand">MDEV Dashboard</Link>
+      <Link class="flex-none text-xl font-semibold text-gray-600 dark:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" :href="route('dashboard')" aria-label="Brand">Client Management</Link>
       </div>
     </div>
 
